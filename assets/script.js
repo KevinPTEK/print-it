@@ -25,14 +25,18 @@ const banner_txt = document.querySelector(".banner-txt")
 const dots = document.querySelector(".dots")
 const src_img = "./assets/images/slideshow/"
 const nbSliders = slides.length
+
 let i = 0
 
-// function pour changer l'image et le texte
 function updateCarrousel(i) {
 	banner_img.setAttribute("src", src_img + slides[i].image)
 	banner_txt.innerHTML = slides[i].tagLine
+	
+	for (compter = 0; compter < slides.length; compter++) {
+		allDot[compter].classList.remove("dot_selected")		
+	}
+	allDot[i].classList.add("dot_selected")
 }
-
 
 //fleches 
 arrow_left.addEventListener("click", () => {
@@ -64,5 +68,9 @@ for (let compter = 0; compter < slides.length; compter++){
 	dot.classList.add("dot") // ajouter la class dot
 	if (compter === 0) {
 		dot.classList.add("dot_selected")
-	}
+	}	
 }
+
+const allDot = document.querySelectorAll(".dot")
+
+
