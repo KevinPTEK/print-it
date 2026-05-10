@@ -17,7 +17,6 @@ const slides = [
 	}
 ]
 
-const banner = document.querySelector("#banner")
 const arrow_left = document.querySelector(".arrow_left")
 const arrow_right = document.querySelector(".arrow_right")
 const banner_img = document.querySelector(".banner-img")
@@ -33,9 +32,9 @@ function updateCarrousel(i) {
 	banner_txt.innerHTML = slides[i].tagLine
 	
 	for (compter = 0; compter < slides.length; compter++) {
-		allDot[compter].classList.remove("dot_selected")		
+		allDots[compter].classList.remove("dot_selected")		
 	}
-	allDot[i].classList.add("dot_selected")
+	allDots[i].classList.add("dot_selected")
 }
 
 //fleches 
@@ -71,6 +70,6 @@ for (let compter = 0; compter < slides.length; compter++){
 	}	
 }
 
-const allDot = document.querySelectorAll(".dot")
+const allDots = document.querySelectorAll(".dot")
 
 
