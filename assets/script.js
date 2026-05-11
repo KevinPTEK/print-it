@@ -31,11 +31,21 @@ function updateCarrousel(i) {
 	banner_img.setAttribute("src", src_img + slides[i].image)
 	banner_txt.innerHTML = slides[i].tagLine
 	
-	for (compter = 0; compter < slides.length; compter++) {
+	for (let compter = 0; compter < slides.length; compter++) {
 		allDots[compter].classList.remove("dot_selected")		
 	}
 	allDots[i].classList.add("dot_selected")
 }
+
+// dots
+for (let compter = 0; compter < slides.length; compter++){
+	let dot = document.createElement("div")
+	dots.appendChild(dot) // mettre la balise div dans la balise avec la class dots
+	dot.classList.add("dot") // ajouter la class dot
+}
+
+const allDots = document.querySelectorAll(".dot")
+
 
 //fleches 
 arrow_left.addEventListener("click", () => {
@@ -58,18 +68,5 @@ arrow_right.addEventListener("click", () => {
 	console.log(i)
 })
 
-
-
-// dots
-for (let compter = 0; compter < slides.length; compter++){
-	let dot = document.createElement("div")
-	dots.appendChild(dot) // mettre la balise div dans la balise avec la class dots
-	dot.classList.add("dot") // ajouter la class dot
-	if (compter === 0) {
-		dot.classList.add("dot_selected")
-	}	
-}
-
-const allDots = document.querySelectorAll(".dot")
-
-
+//initialisation fonction
+updateCarrousel(0)
