@@ -17,56 +17,73 @@ const slides = [
 	}
 ]
 
-const arrow_left = document.querySelector(".arrow_left")
-const arrow_right = document.querySelector(".arrow_right")
-const banner_img = document.querySelector(".banner-img")
-const banner_txt = document.querySelector(".banner-txt")
-const dots = document.querySelector(".dots")
-const src_img = "./assets/images/slideshow/"
-const nbSliders = slides.length
+const arrowLeft  = document.querySelector(".arrow_left")
+const arrowRight = document.querySelector(".arrow_right")
+const bannerImg  = document.querySelector(".banner-img")
+const bannerTxt  = document.querySelector(".banner-txt")
+const dots       = document.querySelector(".dots")
+const srcImg     = "./assets/images/slideshow/"
+const nbSliders  = slides.length
+ 
+let indexActuel = 0
+ 
+ 
 
-let i = 0
-
-function updateCarrousel(i) {
-	banner_img.setAttribute("src", src_img + slides[i].image)
-	banner_txt.innerHTML = slides[i].tagLine
-	
-	for (let compter = 0; compter < slides.length; compter++) {
-		allDots[compter].classList.remove("dot_selected")		
-	}
-	allDots[i].classList.add("dot_selected")
+// Initialisation
+ 
+function init() {
+	createDots()
+	updateCarrousel(0)
 }
 
-// dots
-for (let compter = 0; compter < slides.length; compter++){
-	let dot = document.createElement("div")
-	dots.appendChild(dot) // mettre la balise div dans la balise avec la class dots
-	dot.classList.add("dot") // ajouter la class dot
+// Fonctions
+ 
+function updateCarrousel(index) {
+	updateBanner(index)
+	updateDots(index)
 }
 
-const allDots = document.querySelectorAll(".dot")
-
-
-//fleches 
-arrow_left.addEventListener("click", () => {
-	if (i > 0){
-		i--
-	} else {
-		i = nbSliders - 1
+function updateBanner(index) {
+	bannerImg.setAttribute("src", srcImg + slides[index].image)
+	bannerTxt.innerHTML = slides[index].tagLine
+}
+ 
+function createDots() {
+	for (let i = 0; i < slides.length; i++) {
+		const dot = document.createElement("div")
+		dot.classList.add("dot")
+		dots.appendChild(dot)
 	}
-	updateCarrousel(i)
-	console.log(i)
+}
+
+function updateDots(index) {
+	const allDots = document.querySelectorAll(".dot")
+	for (let i = 0; i < allDots.length; i++) {
+		allDots[i].classList.remove("dot_selected")
+	}
+	allDots[index].classList.add("dot_selected")
+}
+ 
+// Événements
+ 
+arrowLeft.addEventListener("click", () => {
+	if (indexActuel > 0){
+		indexActuel--
+	} else {
+		indexActuel = nbSliders - 1
+	}
+	updateCarrousel(indexActuel)
 })
 
-arrow_right.addEventListener("click", () => {
-	if (i < nbSliders - 1 ) {
-		i++		
+arrowRight.addEventListener("click", () => {
+	if (indexActuel < nbSliders - 1 ) {
+		indexActuel++		
 	} else {
-		i = 0
+		indexActuel = 0
 	}
-	updateCarrousel(i)	
-	console.log(i)
+	updateCarrousel(indexActuel)
 })
-
-//initialisation fonction
-updateCarrousel(0)
+ 
+// Lancement
+ 
+init()
