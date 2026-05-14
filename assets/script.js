@@ -75,6 +75,7 @@ function updateDots() {
 	allDots[currentIndex].classList.add("dot_selected")
 }
 
+// fonction modulo 
 function nextIndex() {
 	return (currentIndex + 1) % nbSliders
 }
