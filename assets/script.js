@@ -25,65 +25,65 @@ const dots       = document.querySelector(".dots")
 const srcImg     = "./assets/images/slideshow/"
 const nbSliders  = slides.length
  
-let indexActuel = 0
+let currentIndex = 0
  
  
-
 // Initialisation
  
-function init() {
+function initCarousel() {
 	createDots()
-	updateCarrousel(0)
-}
-
-// Fonctions
  
-function updateCarrousel(index) {
-	updateBanner(index)
-	updateDots(index)
+	arrowLeft.addEventListener("click", () => {
+		currentIndex = previousIndex()
+		renderCarousel()
+	})
+ 
+	arrowRight.addEventListener("click", () => {
+		currentIndex = nextIndex()
+		renderCarousel()
+	})
+ 
+	renderCarousel()  // affichage initial
 }
-
-function updateBanner(index) {
-	bannerImg.setAttribute("src", srcImg + slides[index].image)
-	bannerTxt.innerHTML = slides[index].tagLine
-}
+ 
+ 
+// Fonctions utilitaires
  
 function createDots() {
-	for (let i = 0; i < slides.length; i++) {
+	for (let i = 0; i < nbSliders; i++) {
 		const dot = document.createElement("div")
 		dot.classList.add("dot")
 		dots.appendChild(dot)
 	}
 }
-
-function updateDots(index) {
+ 
+function renderCarousel() {
+	updateBanner()
+	updateDots()
+}
+ 
+function updateBanner() {
+	bannerImg.setAttribute("src", srcImg + slides[currentIndex].image)
+	bannerTxt.innerHTML = slides[currentIndex].tagLine
+}
+ 
+function updateDots() {
 	const allDots = document.querySelectorAll(".dot")
 	for (let i = 0; i < allDots.length; i++) {
 		allDots[i].classList.remove("dot_selected")
 	}
-	allDots[index].classList.add("dot_selected")
+	allDots[currentIndex].classList.add("dot_selected")
+}
+
+function nextIndex() {
+	return (currentIndex + 1) % nbSliders
+}
+
+function previousIndex() {
+	return (currentIndex - 1 + nbSliders) % nbSliders
 }
  
-// Événements
- 
-arrowLeft.addEventListener("click", () => {
-	if (indexActuel > 0){
-		indexActuel--
-	} else {
-		indexActuel = nbSliders - 1
-	}
-	updateCarrousel(indexActuel)
-})
-
-arrowRight.addEventListener("click", () => {
-	if (indexActuel < nbSliders - 1 ) {
-		indexActuel++		
-	} else {
-		indexActuel = 0
-	}
-	updateCarrousel(indexActuel)
-})
  
 // Lancement
- 
-init()
+
+initCarousel()
