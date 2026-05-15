@@ -23,7 +23,7 @@ const bannerImg  = document.querySelector(".banner-img")
 const bannerTxt  = document.querySelector(".banner-txt")
 const dots       = document.querySelector(".dots")
 const srcImg     = "./assets/images/slideshow/"
-const nbSliders  = slides.length
+const nbSlides  = slides.length
  
 let currentIndex = 0
  
@@ -50,7 +50,7 @@ function initCarousel() {
 // Fonctions utilitaires
  
 function createDots() {
-	for (let i = 0; i < nbSliders; i++) {
+	for (let i = 0; i < nbSlides; i++) {
 		const dot = document.createElement("div")
 		dot.classList.add("dot")
 		dots.appendChild(dot)
@@ -77,11 +77,11 @@ function updateDots() {
 
 // fonction modulo 
 function nextIndex() {
-	return (currentIndex + 1) % nbSliders
+	return (currentIndex + 1) % nbSlides
 }
 
 function previousIndex() {
-	return (currentIndex - 1 + nbSliders) % nbSliders
+	return (currentIndex - 1 + nbSlides) % nbSlides
 }
  
  
